@@ -11,28 +11,48 @@ const router = createRouter({
                 {
                     path: "/",
                     name: "dashboard",
-                    component: () => import("@/components/Dashboard.vue"),
+                    component: () => import("@/pages/Dashboard.vue"),
                 },
                 {
                     path: "/ct/containers",
                     name: "containers",
-                    component: () => import("@/components/Containes.vue"),
+                    component: () => import("@/pages/Containers.vue"),
                 },
                 {
                     path: "/ct/blog",
                     name: "blog",
-                    component: () => import("@/components/Blog.vue"),
+                    component: () => import("@/pages/Blog.vue"),
                 },
                 {
                     path: "/ct/about",
                     name: "about",
-                    component: () => import("@/components/About.vue"),
+                    component: () => import("@/pages/About.vue"),
                 },
                 {
-                    path: "/ct/create_container",
-                    name: "create_container",
-                    component: () =>
-                        import("@/components/Containers/Create.vue"),
+                    path: "/ct/info",
+                    component: () => import("@/pages/ContainerInfo.vue"),
+                    children: [
+                        {
+                            path: "/ct/info",
+                            component: () =>
+                                import("@/components/ContainerInfo/Create.vue"),
+                        },
+                        {
+                            path: "/ct/info/domain",
+                            component: () =>
+                                import("@/components/ContainerInfo/Domain.vue"),
+                        },
+                        {
+                            path: "/ct/info/plan",
+                            component: () =>
+                                import("@/components/ContainerInfo/Plan.vue"),
+                        },
+                        {
+                            path: "/ct/info/dns",
+                            component: () =>
+                                import("@/components/ContainerInfo/DNS.vue"),
+                        },
+                    ],
                 },
             ],
         },

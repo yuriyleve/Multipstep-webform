@@ -6,7 +6,7 @@ import Topbar from './Topbar.vue';
 <template>
     <div class="h-full">
         <div class="flex">
-            <topbar></topbar>
+            <Topbar></Topbar>
         </div>
         <div class="pt-20">
             <router-view></router-view>

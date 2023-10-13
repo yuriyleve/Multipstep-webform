@@ -20,7 +20,7 @@ const items = ref([
     },
     {
         label: 'Create container',
-        to: '/ct/create_container'
+        to: '/ct/info'
     },
 ]);
 </script>
@@ -54,7 +54,7 @@ const items = ref([
                 ">
                         <li v-for="item in items">
                             <router-link :to=item.to
-                                :class="[item.to === '/ct/create_container' ? 'bg-blue-500 text-white ring-2 rounded-lg p-2 md:py-2 md:px-2 mt-4' : 'p-2 md:py-6 md:px-2']">
+                                :class="[item.to === '/ct/info' ? 'bg-blue-500 text-white ring-2 rounded-lg p-2 md:py-2 md:px-2 mt-4' : 'p-2 md:py-6 md:px-2']">
                                 <span>{{ item.label }}</span>
                             </router-link>
                         </li>
