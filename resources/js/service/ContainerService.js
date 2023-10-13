@@ -1,10 +1,16 @@
 import axios from "axios";
 
-const baseUrl = "/api/container";
-
 export default {
     async getContainers() {
-        const response = await axios.get(`${baseUrl}`);
+        const response = await axios.get(`/api/container`);
+        return response.data;
+    },
+    async getServerLocations() {
+        const response = await axios.post(`/api/container/getServerLocations`);
+        return response.data;
+    },
+    async getPlans() {
+        const response = await axios.get(`/api/plan`);
         return response.data;
     },
 };

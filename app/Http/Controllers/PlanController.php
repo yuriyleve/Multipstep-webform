@@ -14,7 +14,9 @@ class PlanController extends Controller
      */
     public function index()
     {
-        return view('container.select_plan');
+        $plans = Plan::all();
+
+        return response()->json($plans);
     }
 
     /**
@@ -44,7 +46,6 @@ class PlanController extends Controller
         $plans = Plan::all();
 
         return view('container.domain_settings', compact('server_locations', 'plans'));
-
     }
 
     /**

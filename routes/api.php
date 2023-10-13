@@ -21,6 +21,7 @@ use App\Http\Controllers\UserContainerController;
 
 Route::middleware('api')->group(function () {
     Route::resource('/container', UserContainerController::class);
+    Route::post('/container/getServerLocations', [UserContainerController::class, 'getServerLocations']);
     Route::resource('/container_info', ContainerInfoController::class);
     Route::resource('/plan', PlanController::class);
     Route::resource('/domain', DomainSettingsController::class);

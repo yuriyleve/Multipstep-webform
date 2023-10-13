@@ -28,14 +28,11 @@ class UserContainerController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function getServerLocations()
     {
-        foreach (Session::all() as $key => $item) {
-            if ($key != '_token') Session::forget($key);
-        }
-
         $server_locations = ServerLocations::all();
-        return view('container.container_create', compact('server_locations'));
+
+        return response()->json($server_locations);
     }
 
     /**

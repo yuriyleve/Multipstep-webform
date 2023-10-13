@@ -35,7 +35,7 @@ const router = createRouter({
                         {
                             path: "/ct/info",
                             component: () =>
-                                import("@/components/ContainerInfo/Create.vue"),
+                                import("@/components/ContainerInfo/Info.vue"),
                         },
                         {
                             path: "/ct/info/domain",
