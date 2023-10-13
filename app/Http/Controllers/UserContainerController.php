@@ -18,7 +18,11 @@ class UserContainerController extends Controller
     {
         $usercontainers = UserContainer::all();
         $plans = Plan::all();
-        return view('container.container_list', compact('usercontainers','plans'));
+
+        return response()->json([
+            'usercontainers' => $usercontainers,
+            'plans' => $plans,
+        ]);
     }
 
     /**
@@ -26,8 +30,8 @@ class UserContainerController extends Controller
      */
     public function create()
     {
-        foreach (Session::all() as $key=>$item){
-            if ($key!='_token') Session::forget($key);
+        foreach (Session::all() as $key => $item) {
+            if ($key != '_token') Session::forget($key);
         }
 
         $server_locations = ServerLocations::all();
@@ -68,7 +72,7 @@ class UserContainerController extends Controller
             'container_billing_period' => $container_billing_period,
             'container_plan_autoupgrade' => $container_plan_autoupgrade,
             'container_status' => $container_status,
-            ]);
+        ]);
 
         return view('container.container_list');
     }
@@ -81,7 +85,7 @@ class UserContainerController extends Controller
         $usercontainer = UserContainer::find($id);
         $server_locations = ServerLocations::all();
         $plan = Plan::all();
-        return view('container.container_show', compact('usercontainer','server_locations', 'plan'));
+        return view('container.container_show', compact('usercontainer', 'server_locations', 'plan'));
     }
 
     /**
@@ -92,7 +96,7 @@ class UserContainerController extends Controller
         $usercontainer = UserContainer::find($id);
         $server_locations = ServerLocations::all();
         $plan = Plan::all();
-        return view('container.container_edit', compact('usercontainer','server_locations', 'plan'));
+        return view('container.container_edit', compact('usercontainer', 'server_locations', 'plan'));
     }
 
     /**
@@ -112,24 +116,23 @@ class UserContainerController extends Controller
         $usercontainer->update([
             'container_name' => $container_name,
             'container_config' => $container_config,
-//            'container_id' => $container_id,
-//            'container_gtm_id' => $container_gtm_id,
+            //            'container_id' => $container_id,
+            //            'container_gtm_id' => $container_gtm_id,
             'container_location' => $container_location,
-//            'container_use_custom_subdomain' => $container_use_custom_subdomain,
+            //            'container_use_custom_subdomain' => $container_use_custom_subdomain,
             'container_domain' => $container_domain,
             'container_subdomain' => $container_subdomain,
-//            'container_tagging_server_url' => $container_tagging_server_url,
-//            'container_plan' => $container_plan,
-//            'container_billing_period' => $container_billing_period,
-//            'container_plan_autoupgrade' => $container_plan_autoupgrade,
+            //            'container_tagging_server_url' => $container_tagging_server_url,
+            //            'container_plan' => $container_plan,
+            //            'container_billing_period' => $container_billing_period,
+            //            'container_plan_autoupgrade' => $container_plan_autoupgrade,
             'container_status' => $container_status
         ]);
 
         $usercontainers = UserContainer::all();
         $server_locations = ServerLocations::all();
         $plans = Plan::all();
-        return view('container.container_list', compact('usercontainers','server_locations', 'plans'));
-
+        return view('container.container_list', compact('usercontainers', 'server_locations', 'plans'));
     }
 
     /**

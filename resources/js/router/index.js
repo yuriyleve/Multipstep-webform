@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import AppLayout from "@/layout/AppLayout.vue";
+import Layout from "@/layout/Layout.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {
             path: "/",
-            component: AppLayout,
+            component: Layout,
             children: [
                 {
                     path: "/",
