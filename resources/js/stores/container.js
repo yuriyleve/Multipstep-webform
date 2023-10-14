@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 
 export const useContainerStore = defineStore("container", () => {
-    const container = ref({
+    const initialState = {
         name: "",
         config: "",
         id: "",
@@ -13,14 +13,21 @@ export const useContainerStore = defineStore("container", () => {
         plan_autoupgrade: "",
         domain: "",
         subdomain: "",
-    });
+    };
+
+    const container = ref({ ...initialState });
 
     function update(value) {
         container.value = { ...container.value, ...value };
     }
 
+    function reset() {
+        container.value = { ...initialState };
+    }
+
     return {
         container,
         update,
+        reset,
     };
 });

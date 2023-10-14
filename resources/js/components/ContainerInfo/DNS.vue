@@ -5,9 +5,10 @@ import { useRouter } from 'vue-router';
 import ContainerService from "@/service/ContainerService";
 
 const router = useRouter();
-const container = useContainerStore()
+const store = useContainerStore()
 const handleSubmit = async () => {
-    await ContainerService.createService(container);
+    await ContainerService.createService(store);
+    store.reset();
     router.push('/ct/containers');
 }
 </script>
@@ -45,7 +46,7 @@ const handleSubmit = async () => {
                         <div>TTL</div>
                         <div>Type</div>
                         <div>Record</div>
-                        <div>{{ container.subdomain }}.{{ container.domain }}</div>
+                        <div>{{ store.container.subdomain }}.{{ store.container.domain }}</div>
                         <div>300</div>
                         <div>A</div>
                         <div>51.195.44.157 <button>Copy</button></div>

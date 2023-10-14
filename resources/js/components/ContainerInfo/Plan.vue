@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 import ContainerService from "@/service/ContainerService";
 
 const router = useRouter();
-const container = useContainerStore()
+const store = useContainerStore()
 const plans = ref()
 const handleSubmit = () => {
     router.push('/ct/info/domain');
@@ -23,8 +23,8 @@ onMounted(async () => {
         <form @submit.prevent="handleSubmit">
             <div class="relative -mt-6 mb-1" v-for="plan in plans">
                 <input required class="relative top-12 peer ml-2" type="radio" name="container_plan"
-                    :checked="container.plan === plan.id" :value="plan.id"
-                    @input="event => container.update({ plan: event.target.value })" :id="'container_plan_' + plan.id">
+                    :checked="store.container.plan == plan.id" :value="plan.id"
+                    @input="event => store.update({ plan: event.target.value })" :id="'container_plan_' + plan.id">
                 <label
                     class="grid grid-cols-3 pl-8 p-2 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:text-white peer-checked:ring-blue-500 peer-checked:bg-blue-500 peer2-checked:ring-2 peer-checked:border-transparent"
                     :for="'container_plan_' + plan.id">
@@ -40,8 +40,8 @@ onMounted(async () => {
             <div class="my-4">
                 <label class="font-bold">Billing period</label>
                 <select required id="container_billing_period" name="container_billing_period"
-                    :value="container.billing_period"
-                    @input="event => container.update({ billing_period: event.target.value })" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    :value="store.container.billing_period"
+                    @input="event => store.update({ billing_period: event.target.value })" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm
                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option value="1">Monthly</option>
                     <option value="2">Yearly</option>
@@ -56,9 +56,9 @@ onMounted(async () => {
                             requests.</div>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
-                        <input required type="checkbox" name="container_plan_autoupgrade"
-                            :checked="container.plan_autoupgrade === '1'"
-                            @input="event => container.update({ plan_autoupgrade: event.target.checked ? '1' : '0' })"
+                        <input type="checkbox" name="container_plan_autoupgrade"
+                            :checked="store.container.plan_autoupgrade === '1'"
+                            @input="event => store.update({ plan_autoupgrade: event.target.checked ? '1' : '0' })"
                             class="sr-only peer">
                         <div
                             class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
