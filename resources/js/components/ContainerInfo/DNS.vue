@@ -2,11 +2,13 @@
 <script setup>
 import { useContainerStore } from '@/stores/container'
 import { useRouter } from 'vue-router';
+import ContainerService from "@/service/ContainerService";
 
 const router = useRouter();
 const container = useContainerStore()
-const handleSubmit = () => {
-
+const handleSubmit = async () => {
+    await ContainerService.createService(container);
+    router.push('/ct/containers');
 }
 </script>
 
@@ -54,7 +56,7 @@ const handleSubmit = () => {
                     </div>
                 </div>
             </div>
-            <router-link to="/ct/info">
+            <router-link to="/ct/info/domain">
                 <span>Back to Custom domain</span>
             </router-link>
             <button type="submit"

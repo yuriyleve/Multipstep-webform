@@ -13,4 +13,8 @@ export default {
         const response = await axios.get(`/api/plan`);
         return response.data;
     },
+    async createService(data) {
+        const response = await axios.post(`/api/container`, data.container);
+        return response.data.pokers;
+    },
 };
