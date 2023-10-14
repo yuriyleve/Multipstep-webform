@@ -78,14 +78,20 @@ class UserContainerController extends Controller
     }
 
     /**
-     * Display the specified resource.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+     * Display the specified resource.                                                                   
      */
-    public function show($id)
+
+    public function getContainerByID(Request $request)
     {
-        $usercontainer = UserContainer::find($id);
+        $usercontainer = UserContainer::find($request->id);
         $server_locations = ServerLocations::all();
         $plan = Plan::all();
-        return view('container.container_show', compact('usercontainer', 'server_locations', 'plan'));
+
+        return response()->json([
+            'usercontainer' => $usercontainer,
+            'server_locations' => $server_locations,
+            'plans' => $plan,
+        ]);
     }
 
     /**
@@ -102,37 +108,29 @@ class UserContainerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserContainer $userContainer)
+    public function updateContainer(Request $request)
     {
-        $container_name = $request->request->get('container_name');
-        $container_config = $request->request->get('container_config');
-        $container_location = $request->request->get('container_location');
-        $container_domain = $request->request->get('container_domain');
-        $container_subdomain = $request->request->get('container_subdomain');
-        $container_status = $request->request->get('container_status') ?? 0;
+        $container_name = $request->container_name;
+        $container_config = $request->container_config;
+        $container_location = $request->container_location;
+        $container_domain = $request->container_domain;
+        $container_subdomain = $request->container_subdomain;
+        $container_status = $request->container_status;
 
         $usercontainer = UserContainer::find($request->id);
 
         $usercontainer->update([
             'container_name' => $container_name,
             'container_config' => $container_config,
-            //            'container_id' => $container_id,
-            //            'container_gtm_id' => $container_gtm_id,
             'container_location' => $container_location,
-            //            'container_use_custom_subdomain' => $container_use_custom_subdomain,
             'container_domain' => $container_domain,
             'container_subdomain' => $container_subdomain,
-            //            'container_tagging_server_url' => $container_tagging_server_url,
-            //            'container_plan' => $container_plan,
-            //            'container_billing_period' => $container_billing_period,
-            //            'container_plan_autoupgrade' => $container_plan_autoupgrade,
             'container_status' => $container_status
         ]);
 
-        $usercontainers = UserContainer::all();
-        $server_locations = ServerLocations::all();
-        $plans = Plan::all();
-        return view('container.container_list', compact('usercontainers', 'server_locations', 'plans'));
+        return response()->json([
+            'message' => 'Success!',
+        ]);
     }
 
     /**

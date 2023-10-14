@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useContainerStore } from '@/stores/container'
 
+const router = useRouter();
+const store = useContainerStore()
 const items = ref([
     {
         label: 'Home',
@@ -23,6 +27,10 @@ const items = ref([
         to: '/ct/info'
     },
 ]);
+const onCreateContainer = () => {
+    store.reset()
+    router.push('/ct/info');
+};
 </script>
 
 <template>
@@ -53,8 +61,12 @@ const items = ref([
                     md:relative md:flex md:min-h-0 md:space-y-0 md:p-0 md:translate-x-0 md:space-x-4 md:m-4
                 ">
                         <li v-for="item in items">
-                            <router-link :to=item.to
-                                :class="[item.to === '/ct/info' ? 'bg-blue-500 text-white ring-2 rounded-lg p-2 md:py-2 md:px-2 mt-4' : 'p-2 md:py-6 md:px-2']">
+                            <span v-if="item.to === '/ct/info'" @click="onCreateContainer()"
+                                class="cursor-pointer bg-blue-500 text-white ring-2 rounded-lg p-2 md:py-2 md:px-2 mt-4">
+                                <span>{{ item.label }}</span>
+                            </span>
+
+                            <router-link v-else :to=item.to class="p-2 md:py-6 md:px-2">
                                 <span>{{ item.label }}</span>
                             </router-link>
                         </li>

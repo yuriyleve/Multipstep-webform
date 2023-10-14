@@ -54,6 +54,16 @@ const router = createRouter({
                         },
                     ],
                 },
+                {
+                    path: "/ct/view/:id",
+                    name: "container_view",
+                    component: () => import("@/pages/ContainerView.vue"),
+                },
+                {
+                    path: "/ct/edit/:id",
+                    name: "container_edit",
+                    component: () => import("@/pages/ContainerEdit.vue"),
+                },
             ],
         },
     ],
