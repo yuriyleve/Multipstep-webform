@@ -9,6 +9,7 @@ const router = useRouter();
 const store = useContainerStore()
 const server_locations = ref();
 const handleSubmit = () => {
+    store.update({ page: 2 })
     router.push('/ct/info/plan');
 }
 

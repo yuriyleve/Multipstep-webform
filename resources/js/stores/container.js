@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 
 export const useContainerStore = defineStore("container", () => {
     const initialState = {
+        page: 1,
         name: "",
         config: "",
         id: "",

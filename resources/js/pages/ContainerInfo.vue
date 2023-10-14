@@ -1,8 +1,6 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue';
-import { useContainerStore } from '@/stores/container'
-
-const container = useContainerStore()
+import Summery from '@/components/ContainerInfo/Summery.vue';
 </script>
 
 <template>
@@ -15,6 +13,7 @@ const container = useContainerStore()
             <div class="w-3/5">
                 <router-view></router-view>
             </div>
+            <Summery></Summery>
         </div>
     </div>
 </template>

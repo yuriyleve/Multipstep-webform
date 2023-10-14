@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const store = useContainerStore()
 const handleSubmit = () => {
+    store.update({ page: 4 })
     router.push('/ct/info/dns');
 }
 </script>

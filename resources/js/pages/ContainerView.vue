@@ -1,10 +1,9 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import ContainerService from "@/service/ContainerService";
 
-const router = useRouter();
 const route = useRoute();
 const server_locations = ref([]);
 const plans = ref([]);
