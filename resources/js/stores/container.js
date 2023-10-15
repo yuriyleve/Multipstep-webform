@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { defineStore } from "pinia";
 
 export const useContainerStore = defineStore("container", () => {
@@ -15,18 +15,31 @@ export const useContainerStore = defineStore("container", () => {
         domain: "",
         subdomain: "",
     };
-
     const container = ref({ ...initialState });
+    const server_locations = ref([]);
+    const plans = ref([]);
 
-    function update(value) {
+    const update = (value) => {
         container.value = { ...container.value, ...value };
-    }
+    };
 
-    function reset() {
+    const reset = () => {
         container.value = { ...initialState };
-    }
+    };
+
+    const fetchContainerData = async () => {
+        const response = await fetch("/api/container");
+        const data = await response.json();
+
+        server_locations.value = data.server_locations;
+        plans.value = data.plans;
+    };
+
+    onMounted(fetchContainerData);
 
     return {
+        server_locations,
+        plans,
         container,
         update,
         reset,

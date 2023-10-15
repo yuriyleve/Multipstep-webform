@@ -14,13 +14,9 @@ onMounted(async () => {
         plans.value = data.plans;
         server_locations.value = data.server_locations;
         usercontainer.value = data.usercontainer;
-
         usercontainer.value.container_status = usercontainer.value.container_status === 1 ? true : false
     });
 });
-const handleCheckboxChange = event => {
-    usercontainer.value.container_status = event.target.checked ? '1' : '0';
-}
 const handleSubmit = async () => {
     await ContainerService.updateContainer(usercontainer.value)
     router.push('/ct/containers');

@@ -17,22 +17,14 @@ class UserContainerController extends Controller
     public function index()
     {
         $usercontainers = UserContainer::all();
+        $server_locations = ServerLocations::all();
         $plans = Plan::all();
 
         return response()->json([
+            'server_locations' => $server_locations,
             'usercontainers' => $usercontainers,
             'plans' => $plans,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function getServerLocations()
-    {
-        $server_locations = ServerLocations::all();
-
-        return response()->json($server_locations);
     }
 
     /**

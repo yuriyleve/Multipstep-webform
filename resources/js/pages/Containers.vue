@@ -8,7 +8,7 @@ const plans = ref();
 
 onMounted(() => {
     ContainerService.getContainers().then((data) => {
-        plans.value = data.plans;
+        plans.value = data.plans
         usercontainers.value = data.usercontainers
     });
 });

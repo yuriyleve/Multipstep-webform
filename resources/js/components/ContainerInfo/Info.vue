@@ -1,21 +1,14 @@
 
 <script setup>
 import { useContainerStore } from '@/stores/container'
-import { ref, onMounted } from "vue";
 import { useRouter } from 'vue-router';
-import ContainerService from "@/service/ContainerService";
 
 const router = useRouter();
 const store = useContainerStore()
-const server_locations = ref();
 const handleSubmit = () => {
     store.update({ page: 2 })
     router.push('/ct/info/plan');
 }
-
-onMounted(async () => {
-    server_locations.value = await ContainerService.getServerLocations();
-});
 
 </script>
 
@@ -43,7 +36,7 @@ onMounted(async () => {
                 <select name="container_location" id="container_location" :value="store.container.location"
                     @input="event => store.update({ location: event.target.value })"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option v-for="option in server_locations" :value="option.id">
+                    <option v-for="option in store.server_locations" :value="option.id">
                         {{ option.server_location_name }}
                     </option>
                 </select>

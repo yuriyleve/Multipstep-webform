@@ -1,24 +1,15 @@
 <script setup>
-import { ref, onMounted } from "vue";
 import { useContainerStore } from '@/stores/container'
-import ContainerService from "@/service/ContainerService";
 
 const store = useContainerStore()
-const server_locations = ref([]);
-const plans = ref([]);
-
-onMounted(async () => {
-    plans.value = await ContainerService.getPlans();
-    server_locations.value = await ContainerService.getServerLocations()
-});
 
 const getPlanById = (id, key) => {
-    const plan = plans.value.find(item => item.id === id);
+    const plan = store.plans.value?.find(item => item.id === id);
     return plan ? plan[key] : '';
 }
 
 const getLocationById = (id, key) => {
-    const location = server_locations.value.find(item => item.id === id);
+    const location = store.server_locations.value?.find(item => item.id === id);
     return location ? location[key] : '';
 }
 </script>

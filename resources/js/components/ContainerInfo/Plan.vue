@@ -1,28 +1,21 @@
 
 <script setup>
 import { useContainerStore } from '@/stores/container'
-import { ref, onMounted } from "vue";
 import { useRouter } from 'vue-router';
-import ContainerService from "@/service/ContainerService";
 
 const router = useRouter();
 const store = useContainerStore()
-const plans = ref()
 const handleSubmit = () => {
     store.update({ page: 3 })
     router.push('/ct/info/domain');
 }
-
-onMounted(async () => {
-    plans.value = await ContainerService.getPlans();
-});
 
 </script>
 
 <template>
     <div>
         <form @submit.prevent="handleSubmit">
-            <div class="relative -mt-6 mb-1" v-for="plan in plans">
+            <div class="relative -mt-6 mb-1" v-for="plan in store.plans">
                 <input required class="relative top-12 peer ml-2" type="radio" name="container_plan"
                     :checked="store.container.plan == plan.id" :value="plan.id"
                     @input="event => store.update({ plan: event.target.value })" :id="'container_plan_' + plan.id">
