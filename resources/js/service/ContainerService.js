@@ -11,7 +11,7 @@ export default {
         });
         return response.data;
     },
-    async createService(data) {
+    async createContainer(data) {
         const response = await axios.post(`/api/container`, data.container);
         return response.data.pokers;
     },

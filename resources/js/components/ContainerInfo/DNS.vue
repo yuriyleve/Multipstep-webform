@@ -7,7 +7,7 @@ import ContainerService from "@/service/ContainerService";
 const router = useRouter();
 const store = useContainerStore()
 const handleSubmit = async () => {
-    await ContainerService.createService(store);
+    await ContainerService.createContainer(store);
 
     store.reset();
     router.push('/ct/containers');
