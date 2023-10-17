@@ -9,24 +9,24 @@ const store = useContainerStore()
         <ul class="text-lg">
             <li>
                 <router-link to="/ct/info">
-                    <span>Container info</span>
+                    <span :class="{ 'font-bold': store.container.page === 1 }">Container info</span>
                 </router-link>
             </li>
             <li>
                 <router-link to="/ct/info/plan" v-if="store.container.name">
-                    <span>Select plan</span>
+                    <span :class="{ 'font-bold': store.container.page === 2 }">Select plan</span>
                 </router-link>
                 <span v-else class="text-gray-300">Select plan</span>
             </li>
             <li>
                 <router-link to="/ct/info/domain" v-if="store.container.plan">
-                    <span>Custom domain</span>
+                    <span :class="{ 'font-bold': store.container.page === 3 }">Custom domain</span>
                 </router-link>
                 <span v-else class="text-gray-300">Custom domain</span>
             </li>
             <li>
                 <router-link to="/ct/info/dns" v-if="store.container.domain">
-                    <span>Review</span>
+                    <span :class="{ 'font-bold': store.container.page === 4 }">Review</span>
                 </router-link>
                 <span v-else class="text-gray-300">Finish</span>
 
