@@ -20,20 +20,20 @@ const getLocationById = (id, key) => {
         <div v-if="store.container.page > 1">
             <h2 class="text-xl font-bold">Summary</h2>
             <h3 class="underline mt-2">Container info</h3>
-            Container name: {{ store.container.container_name }}<br />
-            Container config: {{ store.container.container_config ?? 'not set' }}<br />
-            Container location: {{ getLocationById(store.container.container_location, "server_location_name") }}<br />
+            Container name: {{ store.container.name }}<br />
+            Container config: {{ store.container.config ?? 'not set' }}<br />
+            Container location: {{ getLocationById(store.container.location, "server_location_name") }}<br />
         </div>
         <div v-if="store.container.page > 2">
             <h3 class="underline mt-2">Selected plan</h3>
-            Plan:{{ getPlanById(store.container.container_plan, "plan_name") }}<br />
-            Billing period: {{ store.container.container_billing_period == 1 ? 'Monthly' : 'Yearly' }}<br />
-            Autoupgrade: {{ store.container.container_plan_autoupgrade ? 'Yes' : 'No' }}<br />
+            Plan:{{ getPlanById(store.container.plan, "plan_name") }}<br />
+            Billing period: {{ store.container.billing_period == 1 ? 'Monthly' : 'Yearly' }}<br />
+            Autoupgrade: {{ store.container.plan_autoupgrade ? 'Yes' : 'No' }}<br />
         </div>
         <div v-if="store.container.page > 3">
             <h3 class="underline mt-2">Domain settings</h3>
-            Domain: {{ store.container.container_domain }}<br />
-            Subdomain: {{ store.container.container_subdomain }}<br />
+            Domain: {{ store.container.domain }}<br />
+            Subdomain: {{ store.container.subdomain }}<br />
         </div>
     </div>
 </template>
