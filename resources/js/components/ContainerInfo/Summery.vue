@@ -4,12 +4,12 @@ import { useContainerStore } from '@/stores/container'
 const store = useContainerStore()
 
 const getPlanById = (id, key) => {
-    const plan = store.plans.value?.find(item => item.id === id);
+    const plan = store.plans.find(item => item.id == id);
     return plan ? plan[key] : '';
 }
 
 const getLocationById = (id, key) => {
-    const location = store.server_locations.value?.find(item => item.id === id);
+    const location = store.server_locations.find(item => item.id == id);
     return location ? location[key] : '';
 }
 </script>
