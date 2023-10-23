@@ -34,7 +34,7 @@ const handleSubmit = () => {
             <div class="my-4">
                 <label class="font-bold">Billing period</label>
                 <select required id="container_billing_period" name="container_billing_period"
-                    :value="store.container.billing_period === '' ? '1' : store.container.billing_period"
+                    :value="store.container.billing_period"
                     @input="event => store.update({ billing_period: event.target.value })" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm
                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option value="1">Monthly</option>

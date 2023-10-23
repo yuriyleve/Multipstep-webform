@@ -29,7 +29,6 @@ const items = ref([
 ]);
 const onCreateContainer = () => {
     store.reset()
-    store.update({ billing_period: 1, location: store.server_locations[0]?.id, plan_autoupgrade: 0 })
     router.push('/ct/info');
 };
 </script>

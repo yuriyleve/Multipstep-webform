@@ -12,8 +12,8 @@ export const useContainerStore = defineStore(
             gtm_id: "",
             location: "",
             plan: "",
-            billing_period: "",
-            plan_autoupgrade: "",
+            billing_period: 1,
+            plan_autoupgrade: 0,
             domain: "",
             subdomain: "",
         };
@@ -26,7 +26,10 @@ export const useContainerStore = defineStore(
         };
 
         const reset = () => {
-            container.value = { ...initialState };
+            container.value = {
+                ...initialState,
+                location: server_locations.value[0]?.id,
+            };
         };
 
         const fetchContainerData = async () => {
