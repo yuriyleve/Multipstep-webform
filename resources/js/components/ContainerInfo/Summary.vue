@@ -28,7 +28,7 @@ const getLocationById = (id, key) => {
             <h3 class="underline mt-2">Selected plan</h3>
             Plan:{{ getPlanById(store.container.plan, "plan_name") }}<br />
             Billing period: {{ store.container.billing_period == 1 ? 'Monthly' : 'Yearly' }}<br />
-            Autoupgrade: {{ store.container.plan_autoupgrade ? 'Yes' : 'No' }}<br />
+            Autoupgrade: {{ store.container.plan_autoupgrade == 1 ? 'Yes' : 'No' }}<br />
         </div>
         <div v-if="store.container.page > 3">
             <h3 class="underline mt-2">Domain settings</h3>

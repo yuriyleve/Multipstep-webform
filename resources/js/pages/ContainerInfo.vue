@@ -1,6 +1,6 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue';
-import Summery from '@/components/ContainerInfo/Summery.vue';
+import Summary from '@/components/ContainerInfo/Summary.vue';
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import Summery from '@/components/ContainerInfo/Summery.vue';
             <div class="w-3/5">
                 <router-view></router-view>
             </div>
-            <Summery></Summery>
+            <Summary></Summary>
         </div>
     </div>
 </template>
