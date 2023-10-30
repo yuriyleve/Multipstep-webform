@@ -1,10 +1,5 @@
 <?php
 
-use App\Http\Controllers\ContainerInfoController;
-use App\Http\Controllers\DnsSettingsController;
-use App\Http\Controllers\DomainSettingsController;
-use App\Http\Controllers\PlanController;
-use App\Http\Controllers\UserContainerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('container', UserContainerController::class);
-Route::resource('container_info', ContainerInfoController::class);
-Route::resource('plan', PlanController::class);
-Route::resource('domain', DomainSettingsController::class);
-Route::resource('dns', DnsSettingsController::class);
-
-
+Route::get('{any}', function () {
+    return view('app');
+})->where('any', '.*');

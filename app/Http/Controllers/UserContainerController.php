@@ -17,21 +17,14 @@ class UserContainerController extends Controller
     public function index()
     {
         $usercontainers = UserContainer::all();
-        $plans = Plan::all();
-        return view('container.container_list', compact('usercontainers','plans'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        foreach (Session::all() as $key=>$item){
-            if ($key!='_token') Session::forget($key);
-        }
-
         $server_locations = ServerLocations::all();
-        return view('container.container_create', compact('server_locations'));
+        $plans = Plan::all();
+
+        return response()->json([
+            'server_locations' => $server_locations,
+            'usercontainers' => $usercontainers,
+            'plans' => $plans,
+        ]);
     }
 
     /**
@@ -39,17 +32,18 @@ class UserContainerController extends Controller
      */
     public function store(Request $request)
     {
-        $container_name =  Session::get('container_name');
-        $container_config =  Session::get('container_config');
-        $container_id =  Session::get('container_id');
-        $container_gtm_id =  Session::get('container_gtm_id');
-        $container_location =  Session::get('container_location');
-        $container_plan =  Session::get('container_plan');
-        $container_billing_period =  Session::get('container_billing_period');
-        $container_plan_autoupgrade =  Session::get('container_plan_autoupgrade');
-        $container_domain =  Session::get('container_domain');
-        $container_subdomain =  Session::get('container_subdomain');
+        $randomstring = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $container_id = substr(str_shuffle($randomstring), 1, 8);
 
+        $container_name =  $request->name;
+        $container_config =  $request->config;
+        $container_gtm_id =  'GTM-' . $container_id;
+        $container_location =  $request->location;
+        $container_plan =  $request->plan;
+        $container_billing_period =  $request->billing_period;
+        $container_plan_autoupgrade =  $request->plan_autoupgrade;
+        $container_domain =  $request->domain;
+        $container_subdomain =  $request->subdomain;
         $container_use_custom_subdomain = 1;
         $container_tagging_server_url = 'asdas-arett@addingwell-clients-prod-002.iam.gserviceaccount.com';
         $container_status = 0;
@@ -68,20 +62,28 @@ class UserContainerController extends Controller
             'container_billing_period' => $container_billing_period,
             'container_plan_autoupgrade' => $container_plan_autoupgrade,
             'container_status' => $container_status,
-            ]);
+        ]);
 
-        return view('container.container_list');
+        return response()->json([
+            'message' => 'Success!',
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.                                                                   
      */
-    public function show($id)
+
+    public function getContainerByID(Request $request)
     {
-        $usercontainer = UserContainer::find($id);
+        $usercontainer = UserContainer::find($request->id);
         $server_locations = ServerLocations::all();
         $plan = Plan::all();
-        return view('container.container_show', compact('usercontainer','server_locations', 'plan'));
+
+        return response()->json([
+            'usercontainer' => $usercontainer,
+            'server_locations' => $server_locations,
+            'plans' => $plan,
+        ]);
     }
 
     /**
@@ -92,44 +94,35 @@ class UserContainerController extends Controller
         $usercontainer = UserContainer::find($id);
         $server_locations = ServerLocations::all();
         $plan = Plan::all();
-        return view('container.container_edit', compact('usercontainer','server_locations', 'plan'));
+        return view('container.container_edit', compact('usercontainer', 'server_locations', 'plan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserContainer $userContainer)
+    public function updateContainer(Request $request)
     {
-        $container_name = $request->request->get('container_name');
-        $container_config = $request->request->get('container_config');
-        $container_location = $request->request->get('container_location');
-        $container_domain = $request->request->get('container_domain');
-        $container_subdomain = $request->request->get('container_subdomain');
-        $container_status = $request->request->get('container_status') ?? 0;
+        $container_name = $request->container_name;
+        $container_config = $request->container_config;
+        $container_location = $request->container_location;
+        $container_domain = $request->container_domain;
+        $container_subdomain = $request->container_subdomain;
+        $container_status = $request->container_status;
 
         $usercontainer = UserContainer::find($request->id);
 
         $usercontainer->update([
             'container_name' => $container_name,
             'container_config' => $container_config,
-//            'container_id' => $container_id,
-//            'container_gtm_id' => $container_gtm_id,
             'container_location' => $container_location,
-//            'container_use_custom_subdomain' => $container_use_custom_subdomain,
             'container_domain' => $container_domain,
             'container_subdomain' => $container_subdomain,
-//            'container_tagging_server_url' => $container_tagging_server_url,
-//            'container_plan' => $container_plan,
-//            'container_billing_period' => $container_billing_period,
-//            'container_plan_autoupgrade' => $container_plan_autoupgrade,
             'container_status' => $container_status
         ]);
 
-        $usercontainers = UserContainer::all();
-        $server_locations = ServerLocations::all();
-        $plans = Plan::all();
-        return view('container.container_list', compact('usercontainers','server_locations', 'plans'));
-
+        return response()->json([
+            'message' => 'Success!',
+        ]);
     }
 
     /**
